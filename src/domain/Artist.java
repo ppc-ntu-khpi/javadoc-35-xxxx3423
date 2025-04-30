@@ -1,43 +1,78 @@
 package domain;
 
+/**
+ * Клас Artist є підкласом Employee і представляє співробітника-художника,
+ * який має набір навичок (skills).
+ */
 public class Artist extends Employee {
 
-    public Artist(String[] skiils, String name, String jobTitle, int level, String dept) {
+    // Масив навичок художника
+    private String[] skills;
+
+    /**
+     * Конструктор із параметрами для ініціалізації всіх полів.
+     * @param skills масив навичок художника
+     * @param name ім'я працівника
+     * @param jobTitle посада працівника
+     * @param level рівень працівника
+     * @param dept відділ працівника
+     */
+    public Artist(String[] skills, String name, String jobTitle, int level, String dept) {
         super(name, jobTitle, level, dept);
-        this.skiils = skiils;
+        this.skills = skills;
     }
 
-    public Artist(String[] skiils) {
+    /**
+     * Конструктор з параметром skills, інші поля ініціалізуються конструктором суперкласу без параметрів.
+     * @param skills масив навичок художника
+     */
+    public Artist(String[] skills) {
         super();
-        this.skiils = skiils;
+        this.skills = skills;
     }
     
+    /**
+     * Конструктор за замовчуванням. Ініціалізує масив навичок розміром 10.
+     */
     public Artist() {
         super();
-        this.skiils = new String[10];
+        this.skills = new String[10];
     }
 
+    /**
+     * Перевизначений метод для рядкового представлення об'єкта Artist.
+     * Додає до інформації з Employee список навичок.
+     * @return текстовий опис об'єкта
+     */
     @Override
     public String toString() {
-        return super.toString()+"\nSkills: "+getSkills();
+        return super.toString() + "\nSkills: " + getSkills();
     }
 
-    private String[] skiils;
-
+    /**
+     * Отримання навичок у вигляді одного рядка, розділеного комами.
+     * @return рядок з навичками
+     */
     public String getSkills() {
-        String s = "";
-        for (String e : skiils) {
-            s = s + e + ", ";
+        if (skills == null || skills.length == 0) {
+            return "No skills listed";
         }
-       s=s.substring(0, s.length() - 2);
-        return s;
+        return String.join(", ", skills);
     }
 
+    /**
+     * Встановлення масиву навичок.
+     * @param skills новий масив навичок
+     */
     public void setSkills(String[] skills) {
-        this.skiils=skills;
+        this.skills = skills;
     }
 
-    public String[] getSkillsLSist() {
-        return skiils;
+    /**
+     * Отримання масиву навичок.
+     * @return масив навичок
+     */
+    public String[] getSkillsList() {
+        return skills;
     }
 }
